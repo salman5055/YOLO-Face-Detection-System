@@ -1,0 +1,938 @@
+/* =========================================
+   VISION AI — YOLO26n
+   PROFESSIONAL COMPUTER VISION DASHBOARD
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #080d19;
+    --panel: #0f1728;
+    --panel-light: #131d31;
+    --border: #24314b;
+
+    --blue: #2563eb;
+    --blue-light: #60a5fa;
+
+    --green: #22c55e;
+    --green-dark: #16a34a;
+
+    --amber: #f59e0b;
+    --red: #ef4444;
+
+    --text: #f8fafc;
+    --text-soft: #a7b1c5;
+    --text-muted: #68758e;
+}
+
+
+/* =========================================
+   BODY
+========================================= */
+
+body {
+    min-height: 100vh;
+
+    font-family:
+        Inter,
+        Arial,
+        Helvetica,
+        sans-serif;
+
+    color: var(--text);
+
+    background:
+        radial-gradient(
+            circle at 10% 10%,
+            rgba(37, 99, 235, 0.10),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 90% 80%,
+            rgba(34, 197, 94, 0.06),
+            transparent 30%
+        ),
+        var(--bg);
+}
+
+
+/* =========================================
+   APP
+========================================= */
+
+.app {
+    width: 100%;
+    max-width: 1500px;
+
+    margin: auto;
+
+    padding: 24px 32px;
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 18px 22px;
+
+    background: rgba(15, 23, 40, 0.92);
+
+    border: 1px solid var(--border);
+
+    border-radius: 16px;
+
+    backdrop-filter: blur(12px);
+
+    box-shadow:
+        0 15px 45px rgba(0, 0, 0, 0.22);
+
+    margin-bottom: 22px;
+}
+
+
+/* =========================================
+   BRAND
+========================================= */
+
+.brand {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+}
+
+.brand-icon {
+    width: 48px;
+    height: 48px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #3b82f6
+        );
+
+    font-size: 15px;
+    font-weight: 800;
+
+    box-shadow:
+        0 8px 25px rgba(37, 99, 235, 0.35);
+}
+
+.brand h1 {
+    font-size: 21px;
+    letter-spacing: 0.2px;
+}
+
+.brand p {
+    margin-top: 4px;
+
+    color: var(--text-muted);
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   SYSTEM STATUS
+========================================= */
+
+.system-status {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 9px 14px;
+
+    border-radius: 30px;
+
+    background: rgba(34, 197, 94, 0.07);
+
+    border: 1px solid rgba(34, 197, 94, 0.22);
+
+    color: #86efac;
+
+    font-size: 12px;
+
+    font-weight: 600;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+
+    background: var(--green);
+
+    box-shadow:
+        0 0 12px
+        rgba(34, 197, 94, 0.85);
+
+    animation: pulse 2s infinite;
+}
+
+
+/* =========================================
+   MAIN
+========================================= */
+
+.main {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        350px;
+
+    gap: 22px;
+}
+
+
+/* =========================================
+   CAMERA CARD
+========================================= */
+
+.camera-card {
+    padding: 22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(19, 29, 49, 0.96),
+            rgba(10, 16, 29, 0.96)
+        );
+
+    border: 1px solid var(--border);
+
+    border-radius: 17px;
+
+    box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.22);
+}
+
+
+/* =========================================
+   CARD HEADER
+========================================= */
+
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    margin-bottom: 18px;
+}
+
+.card-header h2 {
+    font-size: 19px;
+}
+
+.card-header p {
+    margin-top: 5px;
+
+    color: var(--text-muted);
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   DETECTION BADGE
+========================================= */
+
+.detection-badge {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    padding: 8px 12px;
+
+    border-radius: 30px;
+
+    background: #111a2c;
+
+    border: 1px solid var(--border);
+
+    color: var(--text-soft);
+
+    font-size: 11px;
+
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+.badge-dot {
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+
+    background: #64748b;
+}
+
+
+/* =========================================
+   CAMERA CONTAINER
+========================================= */
+
+.camera-container {
+    position: relative;
+
+    width: 100%;
+
+    min-height: 520px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: #030712;
+
+    border: 1px solid #26334e;
+
+    border-radius: 14px;
+
+    box-shadow:
+        inset 0 0 50px
+        rgba(0, 0, 0, 0.45);
+}
+
+
+/* =========================================
+   CAMERA VIDEO
+========================================= */
+
+#camera {
+    display: block;
+
+    width: 100%;
+
+    height: auto;
+
+    max-height: 650px;
+
+    object-fit: contain;
+
+    background: #030712;
+}
+
+
+/* =========================================
+   CANVAS
+========================================= */
+
+#canvas {
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+}
+
+
+/* =========================================
+   CAMERA CORNER UI
+========================================= */
+
+.camera-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    pointer-events: none;
+}
+
+.corner {
+    position: absolute;
+
+    width: 32px;
+    height: 32px;
+
+    border-color: rgba(
+        96,
+        165,
+        250,
+        0.9
+    );
+
+    border-style: solid;
+
+    filter:
+        drop-shadow(
+            0 0 7px
+            rgba(59, 130, 246, 0.35)
+        );
+}
+
+.top-left {
+    top: 16px;
+    left: 16px;
+
+    border-width: 3px 0 0 3px;
+}
+
+.top-right {
+    top: 16px;
+    right: 16px;
+
+    border-width: 3px 3px 0 0;
+}
+
+.bottom-left {
+    bottom: 16px;
+    left: 16px;
+
+    border-width: 0 0 3px 3px;
+}
+
+.bottom-right {
+    right: 16px;
+    bottom: 16px;
+
+    border-width: 0 3px 3px 0;
+}
+
+
+/* =========================================
+   CAMERA MESSAGE
+========================================= */
+
+.camera-message {
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    width: 90%;
+
+    transform:
+        translate(-50%, -50%);
+
+    text-align: center;
+}
+
+.camera-icon {
+    width: 65px;
+    height: 65px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    margin: 0 auto 16px;
+
+    border-radius: 50%;
+
+    background: #111b30;
+
+    border: 1px solid #2a3957;
+
+    color: var(--blue-light);
+
+    font-size: 25px;
+
+    box-shadow:
+        0 0 30px
+        rgba(37, 99, 235, 0.10);
+}
+
+.camera-message h3 {
+    font-size: 17px;
+
+    margin-bottom: 6px;
+}
+
+.camera-message p {
+    color: var(--text-muted);
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   CONTROLS
+========================================= */
+
+.controls {
+    display: flex;
+
+    gap: 10px;
+
+    margin-top: 18px;
+}
+
+.btn {
+    min-width: 145px;
+
+    padding: 11px 18px;
+
+    border-radius: 9px;
+
+    border: 1px solid transparent;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.btn span {
+    margin-right: 6px;
+}
+
+.btn-primary {
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #1d4ed8
+        );
+
+    color: white;
+
+    box-shadow:
+        0 8px 22px
+        rgba(37, 99, 235, 0.25);
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 11px 28px
+        rgba(37, 99, 235, 0.35);
+}
+
+.btn-secondary {
+    background: #172136;
+
+    border-color: #2b3852;
+
+    color: #cbd5e1;
+}
+
+.btn-secondary:hover:not(:disabled) {
+    background: #1d2940;
+}
+
+button:disabled {
+    opacity: 0.4;
+
+    cursor: not-allowed;
+}
+
+
+/* =========================================
+   STATUS MESSAGE
+========================================= */
+
+.status-message {
+    margin-top: 12px;
+
+    padding: 11px 14px;
+
+    border-radius: 8px;
+
+    background: #0b1324;
+
+    border: 1px solid #202d47;
+
+    color: var(--text-soft);
+
+    font-size: 11px;
+
+    text-align: center;
+}
+
+
+/* =========================================
+   SIDEBAR
+========================================= */
+
+.sidebar {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 15px;
+}
+
+
+/* =========================================
+   INFO CARD
+========================================= */
+
+.info-card {
+    padding: 18px;
+
+    background:
+        rgba(15, 23, 40, 0.92);
+
+    border: 1px solid var(--border);
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 12px 35px rgba(0, 0, 0, 0.15);
+
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.info-card:hover {
+    transform: translateY(-2px);
+
+    border-color: #30405e;
+}
+
+
+/* =========================================
+   INFO CARD TITLE
+========================================= */
+
+.info-card-title {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+
+    margin-bottom: 16px;
+
+    font-size: 13px;
+
+    font-weight: 700;
+}
+
+.title-icon {
+    width: 27px;
+    height: 27px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 7px;
+
+    background: #17284a;
+
+    color: var(--blue-light);
+
+    font-size: 12px;
+}
+
+
+/* =========================================
+   STAT BOXES
+========================================= */
+
+.stats {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 9px;
+}
+
+.stat-box {
+    padding: 14px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #0c1527,
+            #0a1220
+        );
+
+    border: 1px solid #202c45;
+
+    border-radius: 10px;
+}
+
+.stat-label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--text-muted);
+
+    font-size: 10px;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.5px;
+}
+
+.stat-value {
+    display: block;
+
+    color: white;
+
+    font-size: 22px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================
+   MODEL INFO
+========================================= */
+
+.model-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 11px;
+}
+
+.info-row {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 15px;
+
+    padding-bottom: 9px;
+
+    border-bottom:
+        1px solid rgba(
+            36,
+            49,
+            75,
+            0.55
+        );
+
+    font-size: 11px;
+}
+
+.info-row:last-child {
+    border-bottom: none;
+
+    padding-bottom: 0;
+}
+
+.info-row span {
+    color: var(--text-muted);
+}
+
+.info-row strong {
+    color: #dce3ee;
+
+    text-align: right;
+}
+
+.api-online {
+    color: #4ade80 !important;
+}
+
+
+/* =========================================
+   HOW IT WORKS
+========================================= */
+
+.steps {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 12px;
+}
+
+.step {
+    display: flex;
+
+    align-items: center;
+
+    gap: 11px;
+
+    color: #aab5c8;
+
+    font-size: 11px;
+
+    line-height: 1.4;
+}
+
+.step-number {
+    min-width: 32px;
+    height: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 7px;
+
+    background: #14213b;
+
+    border: 1px solid #293957;
+
+    color: var(--blue-light);
+
+    font-size: 9px;
+
+    font-weight: 800;
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer {
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 17px 4px 4px;
+
+    color: #5f6d86;
+
+    font-size: 10px;
+}
+
+
+/* =========================================
+   ANIMATION
+========================================= */
+
+@keyframes pulse {
+
+    0% {
+        opacity: 1;
+
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.45;
+
+        transform: scale(0.85);
+    }
+
+    100% {
+        opacity: 1;
+
+        transform: scale(1);
+    }
+
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 1100px) {
+
+    .main {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        display: grid;
+
+        grid-template-columns:
+            repeat(3, 1fr);
+    }
+
+}
+
+
+@media (max-width: 800px) {
+
+    .app {
+        padding: 15px;
+    }
+
+    .header {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 14px;
+    }
+
+    .sidebar {
+        grid-template-columns: 1fr;
+    }
+
+    .camera-container {
+        min-height: 400px;
+    }
+
+}
+
+
+@media (max-width: 550px) {
+
+    .camera-card {
+        padding: 15px;
+    }
+
+    .card-header {
+        align-items: flex-start;
+
+        flex-direction: column;
+    }
+
+    .controls {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .camera-container {
+        min-height: 320px;
+    }
+
+    .footer {
+        flex-direction: column;
+
+        gap: 7px;
+
+        text-align: center;
+    }
+
+}

@@ -1,0 +1,8 @@
+path: D:/YOLOFaceDetection/dataset
+
+train: images/train
+val: images/val
+test: images/test
+
+names:
+  0: face

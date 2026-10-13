@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>YOLO26n | Face Detection</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+    <div class="app">
+
+        <!-- ================= HEADER ================= -->
+
+        <header class="header">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    AI
+                </div>
+
+                <div>
+                    <h1>YOLO26n</h1>
+
+                    <p>
+                        Face Detection System
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="system-status">
+
+                <span class="status-dot"></span>
+
+                <span>
+                    AI System Online
+                </span>
+
+            </div>
+
+        </header>
+
+
+        <!-- ================= MAIN ================= -->
+
+        <main class="main">
+
+            <!-- Camera Section -->
+
+            <section class="camera-card">
+
+                <div class="card-header">
+
+                    <div>
+
+                        <h2>
+                            Live Face Detection
+                        </h2>
+
+                        <p>
+                            Real-time face detection using YOLO26n
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        id="detectionBadge"
+                        class="detection-badge"
+                    >
+
+                        <span class="badge-dot"></span>
+
+                        Waiting
+
+                    </div>
+
+                </div>
+
+
+                <!-- Camera -->
+
+                <div class="camera-container">
+
+                    <video
+                        id="camera"
+                        autoplay
+                        playsinline
+                    ></video>
+
+                    <canvas
+                        id="canvas"
+                    ></canvas>
+
+
+                    <!-- Camera Overlay -->
+
+                    <div class="camera-overlay">
+
+                        <div class="corner top-left"></div>
+
+                        <div class="corner top-right"></div>
+
+                        <div class="corner bottom-left"></div>
+
+                        <div class="corner bottom-right"></div>
+
+                    </div>
+
+
+                    <!-- Camera Message -->
+
+                    <div
+                        id="cameraMessage"
+                        class="camera-message"
+                    >
+
+                        <div class="camera-icon">
+                            ◉
+                        </div>
+
+                        <h3>
+                            Camera is Off
+                        </h3>
+
+                        <p>
+                            Click "Start Camera" to begin detection
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- Controls -->
+
+                <div class="controls">
+
+                    <button
+                        id="startCamera"
+                        class="btn btn-primary"
+                    >
+
+                        <span>▶</span>
+
+                        Start Camera
+
+                    </button>
+
+
+                    <button
+                        id="stopCamera"
+                        class="btn btn-secondary"
+                        disabled
+                    >
+
+                        <span>■</span>
+
+                        Stop Camera
+
+                    </button>
+
+                </div>
+
+
+                <!-- Status -->
+
+                <div
+                    id="status"
+                    class="status-message"
+                >
+                    System ready. Start the camera.
+                </div>
+
+            </section>
+
+
+            <!-- ================= SIDEBAR ================= -->
+
+            <aside class="sidebar">
+
+
+                <!-- Detection Stats -->
+
+                <div class="info-card">
+
+                    <div class="info-card-title">
+
+                        <span class="title-icon">
+                            ◉
+                        </span>
+
+                        Detection Results
+
+                    </div>
+
+
+                    <div class="stats">
+
+
+                        <div class="stat-box">
+
+                            <span class="stat-label">
+                                Faces Detected
+                            </span>
+
+                            <span
+                                id="faceCount"
+                                class="stat-value"
+                            >
+                                0
+                            </span>
+
+                        </div>
+
+
+                        <div class="stat-box">
+
+                            <span class="stat-label">
+                                Confidence
+                            </span>
+
+                            <span
+                                id="confidence"
+                                class="stat-value"
+                            >
+                                -
+                            </span>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <!-- Model Information -->
+
+                <div class="info-card">
+
+                    <div class="info-card-title">
+
+                        <span class="title-icon">
+                            ◈
+                        </span>
+
+                        Model Information
+
+                    </div>
+
+
+                    <div class="model-info">
+
+                        <div class="info-row">
+
+                            <span>
+                                Model
+                            </span>
+
+                            <strong>
+                                YOLO26n
+                            </strong>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span>
+                                Task
+                            </span>
+
+                            <strong>
+                                Face Detection
+                            </strong>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span>
+                                Device
+                            </span>
+
+                            <strong>
+                                CPU
+                            </strong>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span>
+                                Input
+                            </span>
+
+                            <strong>
+                                Live Camera
+                            </strong>
+
+                        </div>
+
+
+                        <div class="info-row">
+
+                            <span>
+                                API
+                            </span>
+
+                            <strong class="api-online">
+                                Online
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- How It Works -->
+
+                <div class="info-card">
+
+                    <div class="info-card-title">
+
+                        <span class="title-icon">
+                            ?
+                        </span>
+
+                        How It Works
+
+                    </div>
+
+
+                    <div class="steps">
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                01
+                            </span>
+
+                            <span>
+                                Camera captures frame
+                            </span>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                02
+                            </span>
+
+                            <span>
+                                YOLO26n analyzes the image
+                            </span>
+
+                        </div>
+
+
+                        <div class="step">
+
+                            <span class="step-number">
+                                03
+                            </span>
+
+                            <span>
+                                Face bounding box is displayed
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </aside>
+
+        </main>
+
+
+        <!-- ================= FOOTER ================= -->
+
+        <footer class="footer">
+
+            <span>
+                YOLO26n Face Detection
+            </span>
+
+            <span>
+                AI Computer Vision System
+            </span>
+
+        </footer>
+
+    </div>
+
+
+    <!-- Hidden Capture Canvas -->
+
+    <canvas
+        id="captureCanvas"
+        style="display:none;"
+    ></canvas>
+
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
